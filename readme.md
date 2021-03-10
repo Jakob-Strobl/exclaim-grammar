@@ -12,8 +12,8 @@ The language is in the early stages and untested, so it's subject to many breaki
 
 Inside the ```src/``` folder, each file covers a section of the language.
 
-**examples.md**: Simple use cases of the language used as a basis for development. Some examples display equivalent ways to produce the same output.  
+**[examples.md](src/examples.md)**: Simple use cases of the language used as a basis for development. Some examples display equivalent ways to produce the same output.  
 
-**grammar.md**: Grammar spec with accompanying explanations and thoughts. Currently only includes syntactic definitions, does not cover semantics.  
+**[grammar.md](src/grammar.md)**: Grammar spec with accompanying explanations and thoughts. Currently only includes syntactic definitions, does not cover semantics.  
 
-**lexer.md**: Token definitions and lexical analysis information.  
+**[lexer.md](src/lexer.md)**: Token definitions and lexical analysis information.  
