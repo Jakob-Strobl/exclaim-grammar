@@ -81,6 +81,19 @@ LABEL -> id
 
 ## Incomplete Specs
 
+### Fallback
+
+If you want to perform an iter-render, but the iterator is empty, there should be a fallback clause to render something instead of nothing.  
+Example:
+
+```none
+{{ render! item : site.shop.items }}
+    <li>{{ items }}</li>
+{{ fallback! }}
+    <li>The shop is empty.</li>
+{{!}}
+```
+
 ### Action Elision
 
 Action elision borrows from the idea of lifetime elision in Rust. In unambiguous cases, the user may omit the action while keeping functionality intact - increases workflow.
