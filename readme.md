@@ -4,7 +4,7 @@ This repo contains a somewhat formal specification of exclaim's language/grammar
   
 The language spec evolves alongside the compiler, [exclaim](https://github.com/Jakob-Strobl/exclaim). At times, exclaim's spec may be ahead or behind the compiler.
 
-## Version: Pre-release 1
+## Version: Pre-release 2
 
 The language is in the early stages and untested, so it's subject to many breaking changes.  
 
@@ -17,3 +17,5 @@ Inside the ```spec/``` folder, each file covers a section of the language.
 **[grammar.md](spec/grammar.md)**: Grammar spec with accompanying explanations and thoughts. Currently only includes syntactic definitions, does not cover semantics.  
 
 **[lexer.md](spec/lexer.md)**: Token definitions and lexical analysis information.  
+
+**[grammaphone.md](spec/grammaphone.md)**: Grammar used with my fork of the tool [grammaphone](https://github.com/Jakob-Strobl/grammophone).
