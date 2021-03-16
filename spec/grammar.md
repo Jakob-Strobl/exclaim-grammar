@@ -14,59 +14,85 @@ The grammar for a Block:
 
 ```none
 TEXT -> string_literal TEXT 
-      | {{ BLOCK_COMMAND }} TEXT
+      | {{ BLOCK_STMT }} TEXT
+      | ɛ
 ```
 
 ### Inside Blocks
 
-Every single block declaration will contain a single command. A command comprises two parts: an action tag and an expression. In the future, the compiler will infer the action by deriving the semantic meaning of the expression (see *action elision* below).  
+Every single block declaration will contain a single command. A command comprises two parts: an action and an expression. In the future, the compiler will infer the action by deriving the semantic meaning of the expression (see *action elision* below).  
 
 **View the appendix below to understand the format of the grammar definitions and terminal symbol definition.**
 
 ```none
-BLOCK_COMMAND -> ACTION EXPR 
-               | EXPR
+BLOCK_STMT -> END_STMT
+            | LET_STMT
+            | RENDER_STMT
+            | WRITE_STMT
 
-ACTION -> ACTION_LABEL!  
-        | !  
+END_STMT -> !
 
-ACTION_LABEL -> render 
-              | assign
-              | fallback
-              | write
+LET_STMT -> let! LET_EXPR
+LET_EXPR -> PATTERN = EXPR
 
-EXPR -> ASSIGNMENT
-      | EACH
-      | PIPE
-      | PATTERN
-      | VAR
+RENDER_STMT -> render! RENDER_EXPR
+RENDER_EXPR -> ITER_RENDER_EXPR
+             | ɛ
 
-ASSIGNMENT   -> = EXPR
-EACH         -> : EXPR
-PIPE         -> | FUNCTION
-PATTERN      -> ( PATTERN_LIST )
-PATTERN_LIST -> VAR, PATTERN_LIST
-              | VAR
-VAR          -> label.VAR
-              | label
+ITER_RENDER_EXPR -> PATTERN : EXPR
 
-FUNCTION -> label ARG PIPE
-          | label ARG
+WRITE_STMT -> write! EXPR.
 
-ARG -> ARGS_LIST
+EXPR -> REF EXPR'
+      | LITERAL_EXPR EXPR'
 
-ARGS_LIST -> ARGUMENT, ARGS_LIST
-           | ARGUMENT
+EXPR' -> PIPE
+       | ɛ
 
-ARGUMENT -> STRING_LITERAL
-          | NUMBER_LITERAL
-          | VAR
+PIPE -> | FN_CALL PIPE'
+PIPE' -> | FN_CALL
+       | ɛ
 
-STRING_LITERAL -> " string_literal "
-NUMBER_LITERAL -> number
+FN_CALL -> LABEL ARGS
+
+ARGS -> ( ARG_LIST )
+      | ɛ
+
+ARG_LIST -> EXPR ARG_LIST'
+ARG_LIST' -> , EXPR
+
+PATTERN -> LABEL
+         | ( PAT_LIST )
+PAT_LIST -> LABEL PAT_LIST'
+PAT_LIST' -> , LABEL
+           | ɛ
+
+REF -> LABEL REF_PRIME
+REF_PRIME -> .LABEL
+           | ɛ
+
+LITERAL_EXPR -> INTEGER_LITERAL
+LITERAL_EXPR -> "STRING_LITERAL"
+
+INTEGER_LITERAL -> integer
+STRING_LITERAL -> str
+LABEL -> id
 ```
 
 ## Incomplete Specs
+
+### Fallback
+
+If you want to perform an iter-render, but the iterator is empty, there should be a fallback clause to render something instead of nothing.  
+Example:
+
+```none
+{{ render! item : site.shop.items }}
+    <li>{{ items }}</li>
+{{ fallback! }}
+    <li>The shop is empty.</li>
+{{!}}
+```
 
 ### Action Elision
 
@@ -100,6 +126,6 @@ The syntax is simple, but there are some undecided behaviors of closures:
 
 ### Grammar Terminal Symbol Definitions
 
-**string_literal**: A static string of Unicode characters.
-**label**: A word that will be related to a piece of data.  
-**number**: integer
+**str**: A static string of Unicode characters.  
+**id**: A name assigned to an element in the program.  
+**integer**: just a plain integer
