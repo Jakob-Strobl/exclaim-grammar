@@ -1,6 +1,6 @@
 # Examples
 
-Working ideas of how the language is used.
+Working ideas of the language.
 
 ---
 
@@ -18,7 +18,7 @@ If we wanted to have a header that lists the titles of every song, we would writ
 ### Example A.1
 
 ```md
-{{ assign! songs = site.songs }}
+{{ let! songs = site.songs }}
 ### Titles
 {{ render! song : songs }}
 - {{ write! song.title }}
@@ -62,11 +62,11 @@ Following data:
 ### Example B.1
 
 ```md
-{{ assign! postsByLikes = site.posts | sort "likes" | reverse }}
+{{ let! postsByLikes = site.posts | sort("likes") | reverse }}
 # All-Time Top Post: {{ write! topPost.title }}
 
 # Top 3: 
-{{ render! (post, index) : postsByLikes | take 3 | enumerate }}
+{{ render! (post, index) : postsByLikes | take(3) | enumerate }}
 {{ write! index }}. {{ write! post.title }}
 {{!}}
 ```
