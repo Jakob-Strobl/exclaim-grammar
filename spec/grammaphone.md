@@ -9,21 +9,32 @@ The following grammar can be copy and pasted into my fork of [grammaphone](https
 ```
 BLOCK -> {{ BLOCK_STMT }}.
 
+BLOCK_STMT -> END_STMT.
 BLOCK_STMT -> LET_STMT.
 BLOCK_STMT -> RENDER_STMT.
 BLOCK_STMT -> WRITE_STMT.
 
-LET_STMT -> let! PATTERN LET_STMT'.
-LET_STMT' -> = EXPR.
+# End Block
+END_STMT -> !.
 
-RENDER_STMT -> render! PATTERN EACH.
+# let! block
+LET_STMT -> let! LET_EXPR.
+LET_EXPR -> PATTERN = EXPR.
 
+# render! block
+RENDER_STMT -> render! RENDER_EXPR.
+RENDER_EXPR -> ITER_RENDER_EXPR.
+RENDER_EXPR -> . # Null render expr
+
+ITER_RENDER_EXPR -> PATTERN EACH.
 EACH -> : EXPR.
 
+# write! block
 WRITE_STMT -> write! EXPR.
 
+# Expressions
 EXPR -> REF EXPR'.
-EXPR -> LITERALS EXPR'.
+EXPR -> LITERAL_EXPR EXPR'.
 
 EXPR' -> PIPE.
 EXPR' -> .
@@ -48,7 +59,11 @@ REF -> LABEL REF_PRIME.
 REF_PRIME -> \. LABEL.
 REF_PRIME -> .
 
+LITERAL_EXPR -> INTEGER_LITERAL.
+LITERAL_EXPR -> STRING_LITERAL.
+
 # Terminals
-LITERALS -> 1234 | "str".
+INTEGER_LITERAL -> 1234.
+STRING_LITERAL -> "str".
 LABEL -> id.
 ```
