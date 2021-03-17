@@ -63,6 +63,7 @@ Following data:
 
 ```md
 {{ let! postsByLikes = site.posts | sort("likes") | reverse }}
+{{ let! topPost = postsByLikes | take(1) }}
 # All-Time Top Post: {{ write! topPost.title }}
 
 # Top 3: 
