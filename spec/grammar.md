@@ -26,9 +26,9 @@ Every single block declaration will contain a single command. A command comprise
 
 ```none
 BLOCK_STMT -> END_STMT
-            | LET_STMT
-            | RENDER_STMT
-            | WRITE_STMT
+BLOCK_STMT -> LET_STMT
+BLOCK_STMT -> RENDER_STMT
+BLOCK_STMT -> WRITE_STMT
 
 END_STMT -> !
 
@@ -37,39 +37,39 @@ LET_EXPR -> PATTERN = EXPR
 
 RENDER_STMT -> render! RENDER_EXPR
 RENDER_EXPR -> ITER_RENDER_EXPR
-             | ɛ
+RENDER_EXPR -> ɛ
 
 ITER_RENDER_EXPR -> PATTERN : EXPR
 
 WRITE_STMT -> write! EXPR.
 
 EXPR -> REF EXPR'
-      | LITERAL_EXPR EXPR'
+EXPR -> LITERAL_EXPR EXPR'
 
 EXPR' -> PIPE
-       | ɛ
+EXPR' -> ɛ
 
 PIPE -> | FN_CALL PIPE'
 PIPE' -> | FN_CALL
-       | ɛ
+PIPE' -> ɛ
 
 FN_CALL -> LABEL ARGS
 
 ARGS -> ( ARG_LIST )
-      | ɛ
+ARGS -> ɛ
 
 ARG_LIST -> EXPR ARG_LIST'
 ARG_LIST' -> , EXPR
 
 PATTERN -> LABEL
-         | ( PAT_LIST )
+PATTERN -> ( PAT_LIST )
 PAT_LIST -> LABEL PAT_LIST'
 PAT_LIST' -> , LABEL
-           | ɛ
+PAT_LIST' -> ɛ
 
 REF -> LABEL REF_PRIME
 REF_PRIME -> .LABEL
-           | ɛ
+REF_PRIME -> ɛ
 
 LITERAL_EXPR -> INTEGER_LITERAL
 LITERAL_EXPR -> "STRING_LITERAL"
