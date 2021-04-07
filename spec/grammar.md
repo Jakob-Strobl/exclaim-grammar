@@ -6,9 +6,9 @@ The following is the current working grammar specification for exclaim. The spec
 
 ### Blocks
 
-Blocks are the starting and endpoint for every piece of exclaim's functionality. Unlike other template languages, exclaim only has one type of syntax to denote the existence of a block: ```{{ }}```.  
+Blocks are the starting and endpoint for every piece of exclaim's functionality. Unlike other template languages, exclaim has only one type of syntax to denote the existence of a block: ```{{ }}```.  
 
-Two left curly-brackets to start the block ```{{```, and every open block gets matched with a closing block ```}}```. Other languages have multiple syntax structures to differentiate between data binding and control flow. E.g. using ```{{ }}``` and ```{% %}```. As a user, I have never been fond of multiple syntax structures. The design makes more sense for the designer rather than the user. A single syntax lends to a streamlined workflow.
+Two left curly brackets to start the block ```{{```, and every open block gets matched with a closing block ```}}```. Other languages have multiple syntax structures to differentiate between data binding and control flow. E.g. using ```{{ }}``` and ```{% %}```. As a user, I have never been fond of multiple syntax structures. The design makes more sense for the designer rather than the user. A single syntax lends to a streamlined workflow.
 
 The grammar for a Block:
 
@@ -88,7 +88,7 @@ Example:
 
 ```none
 {{ render! item : site.shop.items }}
-    <li>{{ items }}</li>
+    <li>{{ item }}</li>
 {{ fallback! }}
     <li>The shop is empty.</li>
 {{!}}
@@ -96,7 +96,7 @@ Example:
 
 ### Action Elision
 
-Action elision borrows from the idea of lifetime elision in Rust. In unambiguous cases, the user may omit the action while keeping functionality intact - increases workflow.
+Action elision borrows from the idea of lifetime elision in Rust. In unambiguous cases, the user may omit the action while keeping functionality intact.
 
 Example:  
 ```{{ assign! posts = site.posts }}```  
