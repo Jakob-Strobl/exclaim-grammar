@@ -164,4 +164,10 @@ The types only matter depending on the context of the code you are trying to ren
 
 ### Symbol Resolution
 
-Symbols (aka Labels) are resolved during semantic analysis. Symbols are resolved from being defined inside the template file or in the data-context during data-binding. Type checking and symbol resolution occur in tandem. 
+The semantic analysis also performs symbol resolution. A symbol is a label that refers to a piece of data. The data is either defined in the current scope or exists in the data context. The data context is where external data can be accessed when rendering a template. When resolving a symbol, we check the following locations in order:
+
+1. The local scope
+2. Any parent scope (including the File scope)
+3. Data context
+
+If a symbol is not resolved after checking the data context, Exclaim returns an error. 
