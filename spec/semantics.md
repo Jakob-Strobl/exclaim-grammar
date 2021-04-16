@@ -149,7 +149,7 @@ Exclaim's Patterns take a lot of inspiration from Rust's Patterns.
 
 > "If it looks like a duck and quacks like a duck, it's a duck."
 
-Exclaim does not burden the user with handling types. The lack of need of defining types is possible because Exclaim's data-binding process simplifies any data into only a few types:
+Exclaim does not burden the user with handling types. Dynamic typing is possible because Exclaim's data-binding process simplifies any data into only a few types:
 
 - Scalars
   - A primitive containing a single value
