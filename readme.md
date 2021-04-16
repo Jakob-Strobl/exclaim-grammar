@@ -4,7 +4,7 @@ This repo contains a somewhat formal specification of exclaim's language/grammar
   
 The language spec evolves alongside the compiler, [exclaim](https://github.com/Jakob-Strobl/exclaim). At times, this spec may be ahead or behind the compiler.
 
-## Version: Pre-release 2
+## Version: Pre-release 3
 
 The language is in the early stages and untested, so it's subject to many breaking changes.  
 
