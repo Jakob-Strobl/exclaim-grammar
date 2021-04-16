@@ -113,6 +113,10 @@ Example: End block in File scope
 // File Scope
 ```
 
+### Self-Containing Blocks
+
+Self-contained blocks do not open nor close a new scope. Let and Write are examples of self-containing blocks.
+
 ### Patterns
 
 Patterns allow you to declare/bind one or more variables by either assigning or deconstructing the expression on the right-hand side.
@@ -158,6 +162,6 @@ Exclaim does not burden the user with handling types. The lack of need of defini
 
 The types only matter depending on the context of the code you are trying to render. Render statements need their expressions to resolve into iterators, and a nested reference, ```user.name```, needs ```user``` to be an object containing the field ```name```.
 
-### Self-Containing Blocks
+### Symbol Resolution
 
-Self-contained blocks do not open nor close a new scope. Let and Write are examples of self-containing blocks.
+Symbols (aka Labels) are resolved during semantic analysis. Symbols are resolved from being defined inside the template file or in the data-context during data-binding. Type checking and symbol resolution occur in tandem. 
