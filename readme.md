@@ -19,5 +19,5 @@ Inside the ```spec/``` folder, each file covers a section of the language.
 **[lexer.md](spec/lexer.md)**: Token definitions and lexical analysis information.  
 
 **[grammophone.md](spec/grammaphone.md)**: Grammar used with [this tool: mdaines/grammophone](https://github.com/mdaines/grammophone).  
-I had to add a couple tweaks to get this grammar working on that project in the time. 
+I had to add a couple tweaks to get this grammar working on that project at the time. 
 
